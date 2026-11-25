@@ -38,12 +38,10 @@ function save(key, value) {
 }
 
 // ----- Formatting -----
-// money(1234.5) = "$1,234.50", money(-40) = "−$40", money(5, true) = "+$5"
+// Whole dollars: money(1234.4) = "$1,234", money(-40) = "−$40", money(5, true) = "+$5"
 function money(x, signed = false) {
-  const r = Math.round(x * 100) / 100;
-  const digits = Number.isInteger(r) ? 0 : 2;
-  const sign = r < 0 ? '−' : signed && r > 0 ? '+' : '';
-  return sign + '$' + Math.abs(r).toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  const r = Math.round(x);
+  return (r < 0 ? '−' : signed && r > 0 ? '+' : '') + '$' + Math.abs(r).toLocaleString('en-US');
 }
 // pct(0.1234, 1) = "12.3%", pct(0.33, 0, true) = "+33%"
 function pct(x, digits = 0, signed = false) {

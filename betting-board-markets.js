@@ -197,11 +197,4 @@ const META_TEMPLATES = [
   }),
   groups => groups.flatMap((a, i) => groups.flatMap((b, j) => i === j ? [] : // compare two categories
     [{ text: `More ${a.cat.noun} events than ${b.cat.noun} events happen`, test: c => c[i] > c[j] }])),
-  groups => { // parity
-    const n = sum(groups.map(g => g.markets.length));
-    return [
-      { text: `An even number of the ${n} events above happen`, test: c => sum(c) % 2 === 0 },
-      { text: `An odd number of the ${n} events above happen`, test: c => sum(c) % 2 === 1 },
-    ];
-  },
 ];
