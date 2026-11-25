@@ -101,7 +101,7 @@ const growth = (p, b, f) => p * Math.log(1 + f * b) + (1 - p) * Math.log(1 - f);
 function settle(round) {
   const markets = allMarkets(round.board);
   for (const m of markets) {
-    m.pnl = m.happened ? m.stake * m.odds : -m.stake;
+    m.pnl = m.happened ? Math.round(m.stake * m.odds) : -m.stake; // payouts round to whole dollars
     m.kelly = m.kellyFraction * round.bankroll;
     m.growth = growth(m.p, m.odds, m.stake / round.bankroll);
     m.kellyGrowth = growth(m.p, m.odds, m.kellyFraction);
@@ -298,19 +298,21 @@ function readSettings() {
   };
 }
 
-// ----- Wiring -----
-$('settings-form').onsubmit = e => {
-  e.preventDefault();
-  const settings = readSettings();
-  if (settings.categories.length < 3) return alert('Check at least 3 categories.');
-  save('bb-settings', settings);
-  startGame(settings);
-};
-$('board').oninput = onStakeInput;
-$('board').onsubmit = e => { // Enter or the button: place bets, then go to the next round or the summary
-  e.preventDefault();
-  if (!round.revealed) placeBets();
-  else if (isLastRound()) showSummary();
-  else nextRound();
-};
-showSettings();
+// ----- Wiring (skipped when betting-board-check.html loads this file) -----
+if ($('settings-form')) {
+  $('settings-form').onsubmit = e => {
+    e.preventDefault();
+    const settings = readSettings();
+    if (settings.categories.length < 3) return alert('Check at least 3 categories.');
+    save('bb-settings', settings);
+    startGame(settings);
+  };
+  $('board').oninput = onStakeInput;
+  $('board').onsubmit = e => { // Enter or the button: place bets, then go to the next round or the summary
+    e.preventDefault();
+    if (!round.revealed) placeBets();
+    else if (isLastRound()) showSummary();
+    else nextRound();
+  };
+  showSettings();
+}

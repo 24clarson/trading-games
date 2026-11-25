@@ -21,6 +21,7 @@ Open `index.html` in a browser (works straight from `file://`) or host the folde
 - `index.html`: home page. Add a list item for every new game.
 - `style.css`, `shared.js`: shared by all pages.
 - `betting-board.html`, `betting-board.js`, `betting-board-markets.js`: the betting board game.
+- `betting-board-check.html`, `betting-board-check.js`: self-check page for the betting board (not linked from the home page).
 
 ## Betting board
 - Tuning constants (+EV count weights, markup ranges, probability ranges, defaults) are at the top of `betting-board.js`.
@@ -36,5 +37,7 @@ Open `index.html` in a browser (works straight from `file://`) or host the folde
   It appears in the settings automatically.
 
 ## Checking changes
-There is no test suite. After changing markets, open `betting-board.html`, play a few rounds and check the
-browser console for errors. After a reveal, every market shows its exact count (e.g. `p 3/36`) to sanity-check against.
+- Open `betting-board-check.html` after adding markets or changing tuning constants. It lists every market's
+  exact probability, samples every template (flagging texts that are missing a number), checks the +EV counts
+  and board sizes, and compares simulated frequencies with exact probabilities. Problems show in red.
+- Then play a few rounds in `betting-board.html` and check the browser console for errors.
