@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Betting Board</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a href="index.html">Trading Games</a>
+  <b>Betting Board</b>
+  <span id="round-label"></span>
+  <span id="timer"></span>
+</header>
+
+<section id="settings" hidden>
+  <p>Each round shows three groups of bets, plus bets on the board as a whole. Some prices are better than fair
+    (+EV). Find them, size your stakes, and place your bets before time runs out. Odds are profit to stake:
+    "pays 4:1" means a $1 stake wins $4 and you keep the $1. You start with $1,000, carried from round to round.</p>
+  <form id="settings-form">
+    <fieldset>
+      <legend>Categories: check 3 or more (with more than 3, a random 3 are used each round)</legend>
+      <div id="category-boxes"></div>
+    </fieldset>
+    <label>Rounds <input type="number" name="rounds" min="1" max="20" required></label>
+    <label>Markets per category <input type="number" name="perCategory" min="1" max="6" required></label>
+    <label>Meta markets <input type="number" name="metaCount" min="1" max="3" required></label>
+    <label><input type="checkbox" name="timer"> Timer, seconds per round
+      <input type="number" name="seconds" min="10" max="600" required></label>
+    <button>Start game</button>
+  </form>
+  <h2>Past games</h2>
+  <div id="history"></div>
+</section>
+
+<form id="board" hidden>
+  <div id="groups" class="columns"></div>
+  <h3>The board as a whole</h3>
+  <div id="metas" class="columns"></div>
+  <div class="bar">
+    <span>Bankroll <b id="bankroll"></b></span>
+    <span id="totals"></span>
+    <button id="board-button"></button>
+  </div>
+</form>
+
+<section id="summary" hidden></section>
+
+<script src="shared.js"></script>
+<script src="betting-board-markets.js"></script>
+<script src="betting-board.js"></script>
+</body>
+</html>

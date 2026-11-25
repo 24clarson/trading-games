@@ -1,0 +1,41 @@
+/* The one stylesheet for every page. Black and white; color only where it means something. */
+
+:root { --line: #ccc; --muted: #666; --pos: #080; --neg: #c00; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  max-width: 1100px; margin: 0 auto; padding: 16px;
+  font: 16px/1.4 system-ui, sans-serif; color: #000; background: #fff;
+}
+a { color: inherit; }
+h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; margin: 24px 0 8px; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+label { display: block; margin: 8px 0; }
+fieldset { border: 1px solid var(--line); margin: 0 0 8px; }
+input[type=number] { width: 5em; font: inherit; padding: 2px 4px; }
+button { font: inherit; padding: 6px 18px; border: 1px solid #000; background: #000; color: #fff; cursor: pointer; }
+
+.note { color: var(--muted); font-size: 0.9em; }
+.pos { color: var(--pos); }
+.neg, .red { color: var(--neg); }
+.blue { color: #00c; }
+.green { color: var(--pos); }
+
+header { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; padding-bottom: 8px; margin-bottom: 8px; border-bottom: 1px solid #000; }
+#timer { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+/* ----- Betting board ----- */
+.columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0 16px; }
+.market { border: 1px solid var(--line); padding: 8px 12px; margin-bottom: 8px; }
+.market p { margin: 4px 0; }
+.market.plus { border-color: var(--pos); }
+.market .line { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.market .stake { margin-left: auto; }
+.outcome { font-size: 1.3em; }
+.bar { /* sticks to the bottom of the screen while the board scrolls */
+  position: sticky; bottom: 0; margin-top: 16px; padding: 10px 0; background: #fff; border-top: 1px solid #000;
+  display: flex; gap: 8px 24px; align-items: center; flex-wrap: wrap; font-variant-numeric: tabular-nums;
+}
+.bar button { margin-left: auto; }
